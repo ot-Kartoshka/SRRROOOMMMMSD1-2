@@ -14,14 +14,24 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 
-add_library(LAB1 BigUInt.cpp)
+add_library(LAB1 LAB1/BigUInt.cpp)
 
-add_executable(LAB1_app main.cpp)
+target_include_directories(LAB1 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/LAB1)
+
+
+add_executable(LAB1_app LAB1_app/main.cpp)
 target_link_libraries(LAB1_app PRIVATE LAB1)
 
 enable_testing()
 
-add_executable(bigint_tests test_biguint.cpp)
+
+add_executable(bigint_tests 
+    bigint_tests/test_biguint.cpp
+    bigint_tests/pch.cpp
+)
+
+target_include_directories(bigint_tests PRIVATE bigint_tests)
+
 target_link_libraries(bigint_tests PRIVATE LAB1 GTest::gtest_main)
 
 include(GoogleTest)

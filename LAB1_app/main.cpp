@@ -3,7 +3,7 @@
 #include <vector>
 #include <chrono>
 #include <cassert>
-#include "..\LAB1\BigUInt.hpp"
+#include "BigUInt.hpp"
 
 using namespace std;
 
